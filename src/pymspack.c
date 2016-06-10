@@ -838,9 +838,11 @@ static const char __pyx_k_path[] = "path";
 static const char __pyx_k_self[] = "self";
 static const char __pyx_k_size[] = "size";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_type[] = "type";
 static const char __pyx_k_0_1_0[] = "0.1.0";
 static const char __pyx_k_close[] = "close";
 static const char __pyx_k_isdir[] = "isdir";
+static const char __pyx_k_value[] = "value";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_module[] = "__module__";
@@ -860,6 +862,7 @@ static const char __pyx_k_attribs_2[] = "_attribs";
 static const char __pyx_k_date_time[] = "date_time";
 static const char __pyx_k_file_size[] = "file_size";
 static const char __pyx_k_metaclass[] = "__metaclass__";
+static const char __pyx_k_traceback[] = "traceback";
 static const char __pyx_k_filename_2[] = "filename";
 static const char __pyx_k_destination[] = "destination";
 static const char __pyx_k_file_or_info[] = "file_or_info";
@@ -926,6 +929,9 @@ static PyObject *__pyx_n_s_size;
 static PyObject *__pyx_n_s_src_pymspack;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_test_bit;
+static PyObject *__pyx_n_s_traceback;
+static PyObject *__pyx_n_s_type;
+static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_pf_3src_8pymspack_test_bit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_int_type, PyObject *__pyx_v_offset); /* proto */
 static PyObject *__pyx_pf_3src_8pymspack_7CabInfo___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_name, PyObject *__pyx_v_size, PyObject *__pyx_v_date, PyObject *__pyx_v_attribs); /* proto */
@@ -938,7 +944,9 @@ static PyObject *__pyx_pf_3src_8pymspack_7CabFile_8infolist(struct __pyx_obj_3sr
 static PyObject *__pyx_pf_3src_8pymspack_7CabFile_10namelist(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3src_8pymspack_7CabFile_12extract(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self, PyObject *__pyx_v_file_or_info, PyObject *__pyx_v_destination, PyObject *__pyx_v_path); /* proto */
 static PyObject *__pyx_pf_3src_8pymspack_7CabFile_14_must_be_open(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self); /* proto */
-static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_8pymspack_7CabFile_16__enter__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_8pymspack_7CabFile_18__exit__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback); /* proto */
+static void __pyx_pf_3src_8pymspack_7CabFile_20__dealloc__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self); /* proto */
 static PyObject *__pyx_tp_new_3src_8pymspack_CabFile(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -3027,7 +3035,7 @@ static PyObject *__pyx_pf_3src_8pymspack_7CabFile_14_must_be_open(struct __pyx_o
  *         if self._c_cabd_cabinet is NULL:
  *             raise Exception('CAB file must be open')             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def __enter__(self):
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_Exception, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -3065,7 +3073,195 @@ static PyObject *__pyx_pf_3src_8pymspack_7CabFile_14_must_be_open(struct __pyx_o
   return __pyx_r;
 }
 
-/* "src/pymspack.pyx":108
+/* "src/pymspack.pyx":107
+ *             raise Exception('CAB file must be open')
+ * 
+ *     def __enter__(self):             # <<<<<<<<<<<<<<
+ *         return self
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_8pymspack_7CabFile_17__enter__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_8pymspack_7CabFile_17__enter__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__enter__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_3src_8pymspack_7CabFile_16__enter__(((struct __pyx_obj_3src_8pymspack_CabFile *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_8pymspack_7CabFile_16__enter__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__enter__", 0);
+
+  /* "src/pymspack.pyx":108
+ * 
+ *     def __enter__(self):
+ *         return self             # <<<<<<<<<<<<<<
+ * 
+ *     def __exit__(self, type, value, traceback):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_self));
+  __pyx_r = ((PyObject *)__pyx_v_self);
+  goto __pyx_L0;
+
+  /* "src/pymspack.pyx":107
+ *             raise Exception('CAB file must be open')
+ * 
+ *     def __enter__(self):             # <<<<<<<<<<<<<<
+ *         return self
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/pymspack.pyx":110
+ *         return self
+ * 
+ *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
+ *         self.close()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_8pymspack_7CabFile_19__exit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_3src_8pymspack_7CabFile_19__exit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  CYTHON_UNUSED PyObject *__pyx_v_type = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_value = 0;
+  CYTHON_UNUSED PyObject *__pyx_v_traceback = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__exit__ (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_type,&__pyx_n_s_value,&__pyx_n_s_traceback,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_type)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 3, 3, 1); __PYX_ERR(0, 110, __pyx_L3_error)
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_traceback)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 3, 3, 2); __PYX_ERR(0, 110, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__exit__") < 0)) __PYX_ERR(0, 110, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_type = values[0];
+    __pyx_v_value = values[1];
+    __pyx_v_traceback = values[2];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("__exit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 110, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("src.pymspack.CabFile.__exit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_3src_8pymspack_7CabFile_18__exit__(((struct __pyx_obj_3src_8pymspack_CabFile *)__pyx_v_self), __pyx_v_type, __pyx_v_value, __pyx_v_traceback);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_8pymspack_7CabFile_18__exit__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_RefNannySetupContext("__exit__", 0);
+
+  /* "src/pymspack.pyx":111
+ * 
+ *     def __exit__(self, type, value, traceback):
+ *         self.close()             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "src/pymspack.pyx":110
+ *         return self
+ * 
+ *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
+ *         self.close()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("src.pymspack.CabFile.__exit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/pymspack.pyx":114
  * 
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3074,17 +3270,17 @@ static PyObject *__pyx_pf_3src_8pymspack_7CabFile_14_must_be_open(struct __pyx_o
  */
 
 /* Python wrapper */
-static void __pyx_pw_3src_8pymspack_7CabFile_17__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_3src_8pymspack_7CabFile_17__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_3src_8pymspack_7CabFile_21__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_3src_8pymspack_7CabFile_21__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(((struct __pyx_obj_3src_8pymspack_CabFile *)__pyx_v_self));
+  __pyx_pf_3src_8pymspack_7CabFile_20__dealloc__(((struct __pyx_obj_3src_8pymspack_CabFile *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self) {
+static void __pyx_pf_3src_8pymspack_7CabFile_20__dealloc__(struct __pyx_obj_3src_8pymspack_CabFile *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
@@ -3092,7 +3288,7 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "src/pymspack.pyx":109
+  /* "src/pymspack.pyx":115
  * 
  *     def __dealloc__(self):
  *         if self._c_cab_decompressor is not NULL:             # <<<<<<<<<<<<<<
@@ -3102,14 +3298,14 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
   __pyx_t_1 = ((__pyx_v_self->_c_cab_decompressor != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "src/pymspack.pyx":110
+    /* "src/pymspack.pyx":116
  *     def __dealloc__(self):
  *         if self._c_cab_decompressor is not NULL:
  *             self.close()             # <<<<<<<<<<<<<<
  *             pymspack.mspack_destroy_cab_decompressor(self._c_cab_decompressor)
  *             self._c_cab_decompressor = NULL
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -3122,16 +3318,16 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
       }
     }
     if (__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
-      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "src/pymspack.pyx":111
+    /* "src/pymspack.pyx":117
  *         if self._c_cab_decompressor is not NULL:
  *             self.close()
  *             pymspack.mspack_destroy_cab_decompressor(self._c_cab_decompressor)             # <<<<<<<<<<<<<<
@@ -3140,7 +3336,7 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
  */
     mspack_destroy_cab_decompressor(__pyx_v_self->_c_cab_decompressor);
 
-    /* "src/pymspack.pyx":112
+    /* "src/pymspack.pyx":118
  *             self.close()
  *             pymspack.mspack_destroy_cab_decompressor(self._c_cab_decompressor)
  *             self._c_cab_decompressor = NULL             # <<<<<<<<<<<<<<
@@ -3148,7 +3344,7 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
  */
     __pyx_v_self->_c_cab_decompressor = NULL;
 
-    /* "src/pymspack.pyx":109
+    /* "src/pymspack.pyx":115
  * 
  *     def __dealloc__(self):
  *         if self._c_cab_decompressor is not NULL:             # <<<<<<<<<<<<<<
@@ -3157,7 +3353,7 @@ static void __pyx_pf_3src_8pymspack_7CabFile_16__dealloc__(struct __pyx_obj_3src
  */
   }
 
-  /* "src/pymspack.pyx":108
+  /* "src/pymspack.pyx":114
  * 
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -3200,7 +3396,7 @@ static void __pyx_tp_dealloc_3src_8pymspack_CabFile(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_3src_8pymspack_7CabFile_17__dealloc__(o);
+    __pyx_pw_3src_8pymspack_7CabFile_21__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
@@ -3214,6 +3410,8 @@ static PyMethodDef __pyx_methods_3src_8pymspack_CabFile[] = {
   {"namelist", (PyCFunction)__pyx_pw_3src_8pymspack_7CabFile_11namelist, METH_NOARGS, 0},
   {"extract", (PyCFunction)__pyx_pw_3src_8pymspack_7CabFile_13extract, METH_VARARGS|METH_KEYWORDS, 0},
   {"_must_be_open", (PyCFunction)__pyx_pw_3src_8pymspack_7CabFile_15_must_be_open, METH_NOARGS, 0},
+  {"__enter__", (PyCFunction)__pyx_pw_3src_8pymspack_7CabFile_17__enter__, METH_NOARGS, 0},
+  {"__exit__", (PyCFunction)__pyx_pw_3src_8pymspack_7CabFile_19__exit__, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -3348,6 +3546,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_src_pymspack, __pyx_k_src_pymspack, sizeof(__pyx_k_src_pymspack), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_test_bit, __pyx_k_test_bit, sizeof(__pyx_k_test_bit), 0, 0, 1, 1},
+  {&__pyx_n_s_traceback, __pyx_k_traceback, sizeof(__pyx_k_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_type, __pyx_k_type, sizeof(__pyx_k_type), 0, 0, 1, 1},
+  {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
   {&__pyx_n_s_version, __pyx_k_version, sizeof(__pyx_k_version), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -3412,7 +3613,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if self._c_cabd_cabinet is NULL:
  *             raise Exception('CAB file must be open')             # <<<<<<<<<<<<<<
  * 
- * 
+ *     def __enter__(self):
  */
   __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_CAB_file_must_be_open); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);

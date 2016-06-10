@@ -104,6 +104,12 @@ cdef class CabFile:
         if self._c_cabd_cabinet is NULL:
             raise Exception('CAB file must be open')
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.close()
+
 
     def __dealloc__(self):
         if self._c_cab_decompressor is not NULL:
