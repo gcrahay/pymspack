@@ -8,7 +8,20 @@ Installation
 Stable release
 --------------
 
-To install Python mspack, run this command in your terminal:
+To run pymspack, you need the `libmspack` library. In Debian/Ubuntu, run:
+
+.. code-block:: console
+
+    $ sudo apt install libmspack0
+
+To compile the native extension, you need the `libmspack` header files. In Debian/Ubuntu, run:
+
+.. code-block:: console
+
+    $ sudo apt install libmspack-dev
+
+
+To install Python pymspack, run this command in your terminal:
 
 .. code-block:: console
 
@@ -25,6 +38,13 @@ you through the process.
 
 From sources
 ------------
+
+You'll need the `libmspack` library.In Debian/Ubuntu, run:
+
+.. code-block:: console
+
+    $ sudo apt install libmspack0 libmspack-dev
+
 
 The sources for Python pymspack can be downloaded from the `Github repo`_.
 
