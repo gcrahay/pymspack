@@ -16,5 +16,5 @@ Python bindings to libmspack
 Features
 --------
 
-* TODO
+* Extract files from MS CAB archive
 
