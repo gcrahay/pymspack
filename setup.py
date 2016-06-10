@@ -6,7 +6,7 @@ from setuptools.extension import Extension
 
 try:
     from Cython.Build import cythonize
-    ext_modules = cythonize([Extension("mspack", ["src/pymspack.pyx"], libraries=["mspack"])])
+    ext_modules = cythonize([Extension("pymspack", ["src/pymspack.pyx"], libraries=["mspack"])])
 except ImportError:
     ext_modules = []
 
