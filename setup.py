@@ -27,7 +27,7 @@ test_requirements = [
 
 setup(
     name='pymspack',
-    version='0.1.0',
+    version='0.1.1',
     description="Python bindings to libmspack",
     long_description=readme + '\n\n' + history,
     author="Gaetan Crahay",

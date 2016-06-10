@@ -1,7 +1,7 @@
 cimport pymspack
 import os.path
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 cdef char * _chars(s):
     if isinstance(s, unicode):
