@@ -1,6 +1,6 @@
 cimport ext
 from os import path as os_path
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 
 cdef char * _chars(s):
     if isinstance(s, unicode):
