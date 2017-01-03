@@ -6,9 +6,11 @@ from setuptools.extension import Extension
 
 try:
     from Cython.Build import cythonize
-    ext_modules = cythonize([Extension("pymspack", ["src/pymspack.pyx"], libraries=["mspack"])])
+    ext_modules = cythonize([Extension("pymspack.ext", ["src/ext.pyx"], libraries=["mspack"])])
 except ImportError:
-    ext_modules = []
+    print("Yous should have Cython installed to build this package extension.")
+    import sys
+    sys.exit()
 
 
 with open('README.rst') as readme_file:
@@ -51,5 +53,7 @@ setup(
     ],
     test_suite='tests',
     tests_require=test_requirements,
-    ext_modules=ext_modules
+    ext_modules=ext_modules,
+    packages=['pymspack',],
+    package_dir={"pymspack": "src"},
 )

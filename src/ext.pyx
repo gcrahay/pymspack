@@ -1,6 +1,5 @@
-cimport pymspack
-import os.path
-
+cimport ext
+from os import path as os_path
 __version__ = "0.1.1"
 
 cdef char * _chars(s):
@@ -28,15 +27,15 @@ class CabInfo:
 
 
 cdef class CabFile:
-    cdef pymspack.mscab_decompressor *_c_cab_decompressor
-    cdef pymspack.mscabd_cabinet *_c_cabd_cabinet
+    cdef ext.mscab_decompressor *_c_cab_decompressor
+    cdef ext.mscabd_cabinet *_c_cabd_cabinet
 
     def __cinit__(self):
         result = 1
-        pymspack.MSPACK_SYS_SELFTEST(result)
+        ext.MSPACK_SYS_SELFTEST(result)
         if result != MSPACK_ERR_OK:
             raise Exception("libmspack cannot be used on your system")
-        self._c_cab_decompressor = pymspack.mspack_create_cab_decompressor(NULL)
+        self._c_cab_decompressor = ext.mspack_create_cab_decompressor(NULL)
         if self._c_cab_decompressor is NULL:
             raise Exception('Cannot create underlying CAB decompressor')
 
@@ -64,7 +63,7 @@ cdef class CabFile:
         file_struct = self._c_cabd_cabinet.files
         infos = list()
         while file_struct is not NULL:
-            infos.append(CabInfo(file_struct.filename, file_struct.length, (
+            infos.append(CabInfo(file_struct.filename.decode('utf-8'), file_struct.length, (
                 file_struct.date_y, int(file_struct.date_m), int(file_struct.date_d),
                 int(file_struct.time_h), int(file_struct.time_m), int(file_struct.time_s)
             )))
@@ -83,17 +82,21 @@ cdef class CabFile:
     def extract(self, file_or_info, destination, path=None):
         self._must_be_open()
         if path is not None:
-            if not os.path.isdir(path):
+            if not os_path.isdir(path):
                 raise Exception("Directory '{}' doesn't exist".format(path))
-            destination = os.path.join(path, destination)
+            destination = os_path.join(path, destination)
         if isinstance(file_or_info, CabInfo):
             file_or_info = file_or_info.filename
+        else:
+            file_or_info = _chars(file_or_info)
         file_struct = self._c_cabd_cabinet.files
         while file_struct is not NULL:
-            if file_or_info == file_struct.filename:
-                ret = self._c_cab_decompressor.extract(self._c_cab_decompressor, file_struct, destination)
-                if ret == pymspack.MSPACK_ERR_OK:
+            filename = file_struct.filename
+            if file_or_info == filename:
+                ret = self._c_cab_decompressor.extract(self._c_cab_decompressor, file_struct, _chars(destination))
+                if ret == ext.MSPACK_ERR_OK:
                     return True
+                print ret
                 raise Exception("Error extracting '{}' ({})".format(file_or_info, ret))
             file_struct = file_struct.next
         raise Exception("File '{}' not in the CAB file".format(file_or_info))
@@ -114,6 +117,6 @@ cdef class CabFile:
     def __dealloc__(self):
         if self._c_cab_decompressor is not NULL:
             self.close()
-            pymspack.mspack_destroy_cab_decompressor(self._c_cab_decompressor)
+            ext.mspack_destroy_cab_decompressor(self._c_cab_decompressor)
             self._c_cab_decompressor = NULL
 
