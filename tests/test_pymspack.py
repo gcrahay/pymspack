@@ -42,6 +42,7 @@ def test_extract():
     temp_dir = None
     try:
         temp_dir = tempfile.mkdtemp()
+        assert os.path.exists(temp_dir)
         cab.extract('WERInternalMetadata.xml', os.path.join(temp_dir, 'WERInternalMetadata.xml'))
         h = hashlib.new('md5')
         with open(os.path.join(temp_dir, 'WERInternalMetadata.xml'), 'rb') as f:
