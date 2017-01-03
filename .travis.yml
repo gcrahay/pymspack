@@ -2,7 +2,10 @@ language: python
 python:
   - "2.7"
   - "3.5"
-# command to install dependencies
+# commands to install dependencies
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libmspack-dev
 install: 
   - "pip install cython"
   - "pip install ."
