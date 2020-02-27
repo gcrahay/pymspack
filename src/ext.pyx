@@ -1,6 +1,40 @@
+#cython: language_level=3
 cimport ext
 from os import path as os_path
-__version__ = "0.2.0"
+from enum import IntEnum as PyIntEnum
+
+class MSPackError(PyIntEnum):
+    OK = MSPACK_ERR_OK
+    args = MSPACK_ERR_ARGS
+    open = MSPACK_ERR_OPEN
+    read = MSPACK_ERR_READ
+    write = MSPACK_ERR_WRITE
+    seek = MSPACK_ERR_SEEK
+    noMemory = MSPACK_ERR_NOMEMORY
+    signature = MSPACK_ERR_SIGNATURE
+    dataFormat = MSPACK_ERR_DATAFORMAT
+    checkSum = MSPACK_ERR_CHECKSUM
+    crunch = MSPACK_ERR_CRUNCH
+    decrunch = MSPACK_ERR_DECRUNCH
+
+exceptionClassMapping = {
+    MSPACK_ERR_ARGS: ValueError,
+    MSPACK_ERR_OPEN: IOError,
+    MSPACK_ERR_READ: IOError,
+    MSPACK_ERR_WRITE: IOError,
+    MSPACK_ERR_SEEK: IOError,
+    MSPACK_ERR_NOMEMORY: MemoryError,
+    MSPACK_ERR_SIGNATURE: ValueError,
+    MSPACK_ERR_DATAFORMAT: ValueError,
+    MSPACK_ERR_CHECKSUM: RuntimeError,
+    MSPACK_ERR_CRUNCH: RuntimeError,
+    MSPACK_ERR_DECRUNCH: RuntimeError,
+}
+
+def selectExceptionClass(v):
+    return exceptionClassMapping[v] if v in exceptionClassMapping else Exception
+
+
 
 cdef char * _chars(s):
     if isinstance(s, unicode):
@@ -34,7 +68,7 @@ cdef class CabFile:
         result = 1
         ext.MSPACK_SYS_SELFTEST(result)
         if result != MSPACK_ERR_OK:
-            raise Exception("libmspack cannot be used on your system")
+            raise selectExceptionClass(result)(MSPackError(result), "libmspack cannot be used on your system")
         self._c_cab_decompressor = ext.mspack_create_cab_decompressor(NULL)
         if self._c_cab_decompressor is NULL:
             raise Exception('Cannot create underlying CAB decompressor')
@@ -50,7 +84,7 @@ cdef class CabFile:
         self._c_cabd_cabinet = self._c_cab_decompressor.open(self._c_cab_decompressor, _chars(file_name))
         if self._c_cabd_cabinet is NULL:
             error = self._c_cab_decompressor.last_error(self._c_cab_decompressor)
-            raise Exception("Cannot open {} file ({})".format(file_name, error))
+            raise selectExceptionClass(error)(MSPackError(error), "Cannot open file", file_name)
 
     def close(self):
         if self._c_cab_decompressor is not NULL:
@@ -83,7 +117,7 @@ cdef class CabFile:
         self._must_be_open()
         if path is not None:
             if not os_path.isdir(path):
-                raise Exception("Directory '{}' doesn't exist".format(path))
+                raise Exception("Directory doesn't exist", path)
             destination = os_path.join(path, destination)
         if isinstance(file_or_info, CabInfo):
             file_or_info = file_or_info.filename
@@ -96,10 +130,9 @@ cdef class CabFile:
                 ret = self._c_cab_decompressor.extract(self._c_cab_decompressor, file_struct, _chars(destination))
                 if ret == ext.MSPACK_ERR_OK:
                     return True
-                print ret
-                raise Exception("Error extracting '{}' ({})".format(file_or_info, ret))
+                raise selectExceptionClass(ret)(MSPackError(ret), "Error extracting", file_or_info)
             file_struct = file_struct.next
-        raise Exception("File '{}' not in the CAB file".format(file_or_info))
+        raise Exception("File not in the CAB file", file_or_info)
 
     def _must_be_open(self):
         if self._c_cab_decompressor is NULL:
