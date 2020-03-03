@@ -1,3 +1,4 @@
+#cython: language_level=3
 cdef extern from "mspack.h":
     cdef struct mscab_decompressor:
         mscabd_cabinet * (*open) (mscab_decompressor *self, const char *filename)
@@ -25,27 +26,27 @@ cdef extern from "mspack.h":
     cdef struct mspack_system:
         pass
 
-    cdef int MSCAB_ATTRIB_RDONLY
-    cdef int MSCAB_ATTRIB_HIDDEN
-    cdef int MSCAB_ATTRIB_SYSTEM
-    cdef int MSCAB_ATTRIB_ARCH
-    cdef int MSCAB_ATTRIB_EXEC
-    cdef int MSCAB_ATTRIB_UTF_NAME
+    cdef const int MSCAB_ATTRIB_RDONLY
+    cdef const int MSCAB_ATTRIB_HIDDEN
+    cdef const int MSCAB_ATTRIB_SYSTEM
+    cdef const int MSCAB_ATTRIB_ARCH
+    cdef const int MSCAB_ATTRIB_EXEC
+    cdef const int MSCAB_ATTRIB_UTF_NAME
 
-    cdef int MSPACK_ERR_OK
-    cdef int MSPACK_ERR_ARGS
-    cdef int MSPACK_ERR_OPEN
-    cdef int MSPACK_ERR_READ
-    cdef int MSPACK_ERR_WRITE
-    cdef int MSPACK_ERR_SEEK
-    cdef int MSPACK_ERR_NOMEMORY
-    cdef int MSPACK_ERR_SIGNATURE
-    cdef int MSPACK_ERR_DATAFORMAT
-    cdef int MSPACK_ERR_CHECKSUM
-    cdef int MSPACK_ERR_CRUNCH
-    cdef int MSPACK_ERR_DECRUNCH
+    cdef const int MSPACK_ERR_OK
+    cdef const int MSPACK_ERR_ARGS
+    cdef const int MSPACK_ERR_OPEN
+    cdef const int MSPACK_ERR_READ
+    cdef const int MSPACK_ERR_WRITE
+    cdef const int MSPACK_ERR_SEEK
+    cdef const int MSPACK_ERR_NOMEMORY
+    cdef const int MSPACK_ERR_SIGNATURE
+    cdef const int MSPACK_ERR_DATAFORMAT
+    cdef const int MSPACK_ERR_CHECKSUM
+    cdef const int MSPACK_ERR_CRUNCH
+    cdef const int MSPACK_ERR_DECRUNCH
 
-    int MSPACK_SYS_SELFTEST(int)
+    void MSPACK_SYS_SELFTEST(int)
 
     mscab_decompressor *mspack_create_cab_decompressor(mspack_system *sys)
     void mspack_destroy_cab_decompressor(mscab_decompressor *self)
